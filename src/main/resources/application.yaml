@@ -1,0 +1,29 @@
+server:
+    servlet:
+        context-path: /api
+
+spring:
+    profiles:
+        active: dev
+---
+spring:
+    config:
+        activate:
+            on-profile: dev
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/todo_list
+        username: postgres
+        password: root
+    jpa:
+        database: POSTGRESQL
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                '[format_sql]': true
+        show-sql: true
+
+server:
+    port: 9080
