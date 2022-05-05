@@ -72,4 +72,14 @@ public class Task {
         joinColumns = @JoinColumn(name = "task_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<Tag> tags = Collections.emptySet();
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+        tag.getTasks().add(this);
+    }
+
+    public void removeTag(Tag tag) {
+        this.tags.remove(tag);
+        tag.getTasks().remove(this);
+    }
 }
