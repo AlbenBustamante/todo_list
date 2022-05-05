@@ -42,5 +42,5 @@ public class Tag {
         mappedBy = "tags",
         fetch = FetchType.LAZY,
         cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private Set<Task> taks = Collections.emptySet();
+    private Set<Task> tasks = Collections.emptySet();
 }
