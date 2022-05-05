@@ -77,6 +77,7 @@ public class TaskServiceImpl extends DeleteService<Task> implements ITaskService
     }
 
     @Override
+    @Transactional
     public Optional<TaskResponse> removeTag(long taskId, long tagId) {
         return this.actionTag(taskId, tagId, false);
     }
