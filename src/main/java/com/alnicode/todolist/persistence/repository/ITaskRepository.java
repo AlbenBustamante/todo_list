@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ITaskRepository extends JpaRepository<Task, Long> {
     Optional<List<Task>> findByFinished(boolean finished);
-    Optional<List<Task>> findByTasksId(long taskId);
+    Optional<List<Task>> findByTodoListId(long todoListId);
 }
