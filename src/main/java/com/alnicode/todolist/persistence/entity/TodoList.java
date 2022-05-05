@@ -52,5 +52,5 @@ public class TodoList {
     private Category category;
 
     @OneToMany(mappedBy = "todoList", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    private Set<Task> taks = Collections.emptySet();
+    private Set<Task> tasks = Collections.emptySet();
 }
