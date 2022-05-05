@@ -73,20 +73,15 @@ public class TaskServiceImpl extends DeleteService<Task> implements ITaskService
     @Override
     @Transactional
     public Optional<TaskResponse> addTag(long taskId, long tagId) {
-        var task = this.repository.findById(taskId);
-        var tag = this.tagRepository.findById(tagId);
-
-        if (!(task.isPresent() && tag.isPresent())) {
-            return Optional.empty();
-        }
-
-        task.get().addTag(tag.get());
-
-        return Optional.of(this.mapper.toResponse(this.repository.save(task.get())));
+        return this.actionTag(taskId, tagId, true);
     }
 
     @Override
     public Optional<TaskResponse> removeTag(long taskId, long tagId) {
+        return this.actionTag(taskId, tagId, false);
+    }
+
+    private Optional<TaskResponse> actionTag(long taskId, long tagId, boolean add) {
         var task = this.repository.findById(taskId);
         var tag = this.tagRepository.findById(tagId);
 
@@ -94,7 +89,11 @@ public class TaskServiceImpl extends DeleteService<Task> implements ITaskService
             return Optional.empty();
         }
 
-        task.get().removeTag(tag.get());
+        if (add) {
+            task.get().addTag(tag.get());
+        } else {
+            task.get().removeTag(tag.get());
+        }
 
         return Optional.of(this.mapper.toResponse(this.repository.save(task.get())));
     }
