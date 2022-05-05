@@ -10,5 +10,5 @@ public interface ITaskService extends ICrudService<TaskRequest, TaskResponse> {
     Optional<List<TaskResponse>> getByStatus(boolean status);
     Optional<List<TaskResponse>> getByTodoList(long todoListId);
     Optional<TaskResponse> addTag(long taskId, long tagId);
-    boolean removeTag(long taskId, long tagId);
+    Optional<TaskResponse> removeTag(long taskId, long tagId);
 }
