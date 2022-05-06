@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("/tasks")
 @Validated
 public class TaskController extends CrudController<TaskRequest, TaskResponse> {
     @Autowired
