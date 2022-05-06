@@ -7,9 +7,11 @@ import javax.validation.constraints.NotNull;
 
 import com.alnicode.todolist.domain.dto.TaskRequest;
 import com.alnicode.todolist.domain.dto.TaskResponse;
+import com.alnicode.todolist.domain.dto.TodoListResponse;
 import com.alnicode.todolist.domain.service.ICrudService;
 import com.alnicode.todolist.domain.service.ITaskService;
 
+import com.alnicode.todolist.domain.service.ITodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,9 +29,17 @@ public class TaskController extends CrudController<TaskRequest, TaskResponse> {
     @Autowired
     private ITaskService service;
 
+    @Autowired
+    private ITodoListService todoListService;
+
     @Override
     protected ICrudService<TaskRequest, TaskResponse> service() {
         return this.service;
+    }
+
+    @GetMapping("/{id}/todolist")
+    public ResponseEntity<TodoListResponse> getTodoList(@NotNull @Min(1L) @PathVariable("id") long taskId) {
+        return ResponseEntity.of(this.todoListService.getByTask(taskId));
     }
 
     @GetMapping("/status/{status}")

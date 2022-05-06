@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ITodoListRepository extends JpaRepository<TodoList, Long> {
     Optional<List<TodoList>> findByCategoryId(long categoryId);
+    Optional<TodoList> findByTasksId(long taskId);
 }

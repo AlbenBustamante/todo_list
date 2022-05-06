@@ -92,9 +92,9 @@ public class TaskServiceImpl extends DeleteService<Task> implements ITaskService
 
         if (!add) {
             task.get().removeTag(tag.get());
+        } else {
+            task.get().addTag(tag.get());
         }
-        
-        task.get().addTag(tag.get());
 
         return Optional.of(this.mapper.toResponse(this.repository.save(task.get())));
     }

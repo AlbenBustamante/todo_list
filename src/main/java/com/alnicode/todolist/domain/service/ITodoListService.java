@@ -8,4 +8,5 @@ import com.alnicode.todolist.domain.dto.TodoListResponse;
 
 public interface ITodoListService extends ICrudService<TodoListRequest, TodoListResponse> {
     Optional<List<TodoListResponse>> getByCategory(long categoryId);
+    Optional<TodoListResponse> getByTask(long taskId);
 }

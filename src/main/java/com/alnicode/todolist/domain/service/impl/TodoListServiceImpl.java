@@ -61,6 +61,11 @@ public class TodoListServiceImpl extends DeleteService<TodoList> implements ITod
     }
 
     @Override
+    public Optional<TodoListResponse> getByTask(long taskId) {
+        return this.repository.findByTasksId(taskId).map(mapper::toResponse);
+    }
+
+    @Override
     protected CrudRepository<TodoList, Long> repository() {
         return this.repository;
     }
