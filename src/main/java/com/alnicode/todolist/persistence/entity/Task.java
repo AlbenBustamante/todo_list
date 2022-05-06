@@ -1,6 +1,6 @@
 package com.alnicode.todolist.persistence.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Set;
 
@@ -51,7 +51,7 @@ public class Task {
     @Future
     @DateTimeFormat(iso = ISO.DATE)
     @Column(name = "assigned_date")
-    private LocalDateTime assignedDate;
+    private LocalDate assignedDate;
 
     @NotNull
     private Boolean finished;
