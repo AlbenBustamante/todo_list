@@ -1,0 +1,1 @@
+web: java -jar -Dspring.profiles.active=pdn build/libs/todo-list-1.0.war
