@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
-@Service("appUserDetailsService")
-public class UserDetailsServiceImpl implements UserDetailsService {
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private IUserRepository userRepository;
 
