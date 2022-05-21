@@ -1,5 +1,11 @@
 package com.alnicode.todolist.web.advice;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import javax.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +15,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static com.alnicode.todolist.util.AppConstants.DATE_FORMAT;
 
@@ -44,6 +45,15 @@ public class GlobalCustomExceptionHandler extends ResponseEntityExceptionHandler
         });
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        final Map<String, String> body = new LinkedHashMap<>();
+        body.put("timestamp", timestamp());
+        body.put("errorMessage", "Probablemente ya exista el elemento");
+
+        return ResponseEntity.badRequest().body(body);
     }
 
     private String timestamp() {
