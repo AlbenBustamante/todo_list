@@ -2,6 +2,8 @@ package com.alnicode.todolist.web.controller;
 
 import com.alnicode.todolist.domain.dto.AuthenticationRequest;
 import com.alnicode.todolist.domain.dto.AuthenticationResponse;
+import com.alnicode.todolist.domain.dto.UserResponse;
+import com.alnicode.todolist.domain.service.IUserService;
 import com.alnicode.todolist.domain.service.impl.CustomUserDetailsService;
 import com.alnicode.todolist.web.security.JwtUtil;
 import javax.validation.Valid;
@@ -31,7 +33,10 @@ public class AuthController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    @PostMapping
+    @Autowired
+    private IUserService userService;
+
+    @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> getToken(@NotNull @Valid @RequestBody AuthenticationRequest request) {
         try {
             manager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
@@ -44,5 +49,10 @@ public class AuthController {
         } catch (BadCredentialsException ex) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<UserResponse> registerUser(@NotNull @Valid @RequestBody AuthenticationRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(request));
     }
 }
