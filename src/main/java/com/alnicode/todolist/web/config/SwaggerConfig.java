@@ -21,6 +21,7 @@ import static com.alnicode.todolist.util.AppConstants.BASE_PACKAGE;
 import static com.alnicode.todolist.util.AppConstants.CONTACT_EMAIL;
 import static com.alnicode.todolist.util.AppConstants.CONTACT_NAME;
 import static com.alnicode.todolist.util.AppConstants.CONTACT_URL;
+import static com.alnicode.todolist.util.AppConstants.JWT_NAME;
 
 @Configuration
 @EnableSwagger2
@@ -36,7 +37,7 @@ public class SwaggerConfig {
     }
 
     private ApiKey apiKey() {
-        return new ApiKey("JWT Token", "Authorization", "header");
+        return new ApiKey(JWT_NAME, "Authorization", "header");
     }
 
     private ApiInfo info() {

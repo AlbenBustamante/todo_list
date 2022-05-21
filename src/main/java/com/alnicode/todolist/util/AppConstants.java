@@ -1,6 +1,7 @@
 package com.alnicode.todolist.util;
 
 public interface AppConstants {
+    String JWT_NAME = "JWT token";
     String DATE_FORMAT = "dd-MM-yyyy";
     String BASE_PACKAGE = "com.alnicode.todolist.web.controller";
     String APP_TITLE = "To-Do List";
