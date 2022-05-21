@@ -48,12 +48,9 @@ public class SwaggerConfig {
                 .licenseUrl(APP_LICENSE_URL)
                 .build();
     }
-    
+
     private Contact contact() {
-        return new Contact(
-                CONTACT_NAME,
-                CONTACT_URL,
-                CONTACT_EMAIL);
+        return new Contact(CONTACT_NAME, CONTACT_EMAIL, CONTACT_URL);
     }
 
 }
