@@ -32,11 +32,12 @@ public class UserServiceImpl implements IUserService {
     public UserResponse register(AuthenticationRequest request) {
         final var entity = mapper.toEntity(request);
         entity.setPassword(encoder.encode(request.getPassword()));
+        setRoles(entity);
 
         return mapper.toResponse(repository.save(entity));
     }
 
-    private void setRole(User entity) {
+    private void setRoles(User entity) {
         final var role = roleRepository.findByName("USER");
         final Set<Role> roles = new HashSet<>();
 
