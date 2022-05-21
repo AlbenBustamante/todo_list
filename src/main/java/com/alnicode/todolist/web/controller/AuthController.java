@@ -6,6 +6,7 @@ import com.alnicode.todolist.domain.dto.UserResponse;
 import com.alnicode.todolist.domain.service.IUserService;
 import com.alnicode.todolist.domain.service.impl.CustomUserDetailsService;
 import com.alnicode.todolist.web.security.JwtUtil;
+import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class AuthController {
     private IUserService userService;
 
     @PostMapping("/login")
+    @ApiOperation("Log In and get your token")
     public ResponseEntity<AuthenticationResponse> getToken(@NotNull @Valid @RequestBody AuthenticationRequest request) {
         try {
             manager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
@@ -52,6 +54,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
+    @ApiOperation("Register if you don't have an account")
     public ResponseEntity<UserResponse> registerUser(@NotNull @Valid @RequestBody AuthenticationRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.register(request));
     }
